@@ -105,21 +105,25 @@ This is where the actual implementation happens. You have two primary paths in t
 
 
 #### Methodology 6: Manage & Secure – Ongoing Operations
-
+![manage](images/cloudAdoptionImage6.PNG)
 The final stage focuses on continuous operations.
+!!!list "Management Principles"
+    - [x] **Monitoring:** Use Azure Monitor to get complete visibility into the health of your applications and infrastructure.
+    - [x] **Protection:** Leverage Azure’s platform security features and defensive tools (like Microsoft Defender for Cloud) to protect your assets through a defense-in-depth approach.
+    - [x] **Optimization:** Continuously assess your environment against the core pillars (Reliability, Security, Cost Optimization, Operational Excellence, Performance Efficiency) to ensure you are maximizing value. 
 
-* **Monitoring:** Use Azure Monitor to get complete visibility into the health of your applications and infrastructure.
-* **Protection:** Leverage Azure’s platform security features and defensive tools (like Microsoft Defender for Cloud) to protect your assets through a defense-in-depth approach.
-* **Optimization:** Continuously assess your environment against the core pillars (Reliability, Security, Cost Optimization, Operational Excellence, Performance Efficiency) to ensure you are maximizing value. *Note: This is where CAF connects directly with the complementary Azure Well-Architected Framework (WAF).*
+!!! note "The CAF-WAF Connection" 
+    This is where CAF connects directly with the complementary Azure Well-Architected Framework (WAF).
 
 
 
 #### The Newer Pillar: Sustainability
+:fontawesome-solid-leaf:
+> CAF now incorporates **Sustainability** as a critical methodology.
 
-CAF now incorporates **Sustainability** as a critical methodology.
-
-* **Measure Impact:** Use the Emissions Impact Dashboard to track your carbon footprint.
-* **Optimize Resources:** The most efficient resource is the one you don’t need. Sustainability means eliminating waste, right-sizing workloads, and scaling dynamically. Sustainability and cost optimization often go hand-in-hand.
+!!! list "Sustainability Principles"
+    - [x] **Measure Impact:** Use the Emissions Impact Dashboard to track your carbon footprint.
+    - [x] **Optimize Resources:** The most efficient resource is the one you don’t need. Sustainability means eliminating waste, right-sizing workloads, and scaling dynamically. Sustainability and cost optimization often go hand-in-hand.
 
 ---
 
@@ -128,5 +132,7 @@ CAF now incorporates **Sustainability** as a critical methodology.
 If your Azure journey feels complex, chaotic, or costly, it is probably because you are navigating without a framework. The Microsoft Cloud Adoption Framework is designed to give you clarity, structure, and control.
 
 Stop treating the cloud like a fancy datacenter and start leveraging it as a competitive engine. Leverage the CAF roadmap to build a resilient, efficient foundation in Azure that doesn’t just store your data, but actually drives your business forward.
+
+![transform](images/cloudAdoptionImage7.png)
 
 **Your cloud maturity transformation starts now.**
