@@ -50,6 +50,6 @@ def on_page_markdown(markdown, page, config, files):
              href="https://www.linkedin.com/shareArticle?mini=true&url={page_url}&title={page_title}"
              target="_blank"
              rel="noopener noreferrer">
-            :material-linkedin:
+            Share :material-linkedin:
         </a>
         """)

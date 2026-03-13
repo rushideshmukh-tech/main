@@ -55,7 +55,6 @@ plugins:
         - framework
       post_url_format: "{slug}"
   - tags:
-      tags_file: "blog/tags.md"
   - rss:
       match_path: "blog/posts/*"
       pretty_print: true
@@ -85,6 +84,8 @@ markdown_extensions:
         generic: true
   - footnotes
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.mark
   - attr_list
   - md_in_html
