@@ -36,6 +36,7 @@ theme:
         icon: material/weather-sunny
         name: Light mode
 plugins:
+  - social:
   - search
   - blog:
       enabled: true
@@ -73,6 +74,7 @@ extra:
   analytics:
     provider: google
     property: G-B77B7K5RD6
+
 
 markdown_extensions:
   - def_list
