@@ -107,6 +107,6 @@ markdown_extensions:
 hooks:
   - hooks/socialmedia.py
 
-copyright: "Copyright © 2025 <a href='https://github.com/rushideshmukh-tech'>Rushikesh A. Deshmukh</a>. All rights reserved."
+copyright: "Copyright © 2025 <a href='https://github.com/rushideshmukh-tech'>Rushikesh Deshmukh</a>. All rights reserved."
 
 
