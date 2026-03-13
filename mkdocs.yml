@@ -1,7 +1,7 @@
 site_name: Cloud De-coded with Rushikesh
 site_description: A Blog about Cloud Computing and Technology.
-site_url: https://sitename.example
-repo_name: https://github.com/rushideshmukh-tech/.github
+site_url: https://rushideshmukh-tech.github.io/main/
+repo_name: https://github.com/rushideshmukh-tech/main
 
 theme:
   features:

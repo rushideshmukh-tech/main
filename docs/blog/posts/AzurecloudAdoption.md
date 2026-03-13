@@ -243,3 +243,9 @@ If your Azure journey feels complex, chaotic, or costly, it is probably because 
 Stop treating the cloud like a fancy datacenter and start leveraging it as a competitive engine. Leverage the CAF roadmap to build a resilient, efficient foundation in Azure that doesn’t just store your data, but actually drives your business forward.
 
 **Your cloud maturity transformation starts now.**
+
+---
+
+### :material-book-open-variant: References
+
+- :material-microsoft-azure: [Microsoft Cloud Adoption Framework for Azure — Official Documentation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/overview)
