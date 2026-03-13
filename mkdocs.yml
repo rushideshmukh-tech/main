@@ -70,6 +70,10 @@ extra:
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/rushi-deshmukh/
 
+  analytics:
+    provider: google
+    property: G-B77B7K5RD6
+
 markdown_extensions:
   - def_list
   - pymdownx.tasklist:
