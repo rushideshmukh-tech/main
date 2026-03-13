@@ -36,7 +36,7 @@ theme:
         icon: material/weather-sunny
         name: Light mode
 plugins:
-  - social:
+  - social
   - search
   - blog:
       enabled: true
