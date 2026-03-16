@@ -47,7 +47,7 @@ To get started with Bicep, you need:
 
 ## Step 1: Install Azure CLI
 
-Download and install the [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) for your OS.
+Download and install the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) for your OS.
 
 === ":material-microsoft-windows: Windows"
 
