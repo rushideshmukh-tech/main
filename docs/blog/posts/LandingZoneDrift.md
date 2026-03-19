@@ -200,7 +200,7 @@ flowchart TD
 
 ---
 
-*This is Part 3 of my ongoing series on the Microsoft Cloud Adoption Framework. [Part 1 covered the CAF overview](../azure-cloud-adoption-framework). [Part 2 went deep on Azure Landing Zones design areas](#). Next up: Governance — Azure Policy as Code without killing developer agility.*
+*This is Part 3 of my ongoing series on the Microsoft Cloud Adoption Framework. [Part 1 covered the CAF overview](./AzurecloudAdoption). Part 2 went deep on Azure Landing Zones design areas. Next up: Governance — Azure Policy as Code without killing developer agility.*
 
 ---
 
