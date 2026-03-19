@@ -485,7 +485,7 @@ In Part 3, I go into what happens on Day 200 — when ClickOps, expansion fatigu
 
 ---
 
-*This is Part 2 of my ongoing series on the Microsoft Cloud Adoption Framework. [Part 1 introduced the six CAF phases](azure-cloud-adoption-framework.md). Coming up in Part 4: Governance — Azure Policy as Code without killing developer agility.*
+*This is Part 2 of my ongoing series on the Microsoft Cloud Adoption Framework. [Part 1 introduced the six CAF phases](AzurecloudAdoption.md). Coming up in Part 4: Governance — Azure Policy as Code without killing developer agility.*
 
 ---
 
