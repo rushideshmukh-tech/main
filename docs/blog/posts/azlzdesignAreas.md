@@ -216,18 +216,45 @@ Resource organisation in Azure centres on two constructs: **Management Groups** 
 
 The Microsoft recommended hierarchy looks like this:
 
-```
-Tenant Root Group
-└── Platform
-│   ├── Identity
-│   ├── Management
-│   ├── Connectivity
-│   └── Security            ← dedicated subscription: Sentinel, Log Analytics, Defender for Cloud
-└── Landing Zones
-│   ├── Corp (connected to hub network)
-│   └── Online (internet-facing, no hub connectivity)
-└── Sandbox
-└── Decommissioned
+```mermaid
+flowchart TB
+    TRG["fa:fa-sitemap Tenant Root Group"]
+
+    PLAT["fa:fa-layer-group Platform"]
+    LZ["fa:fa-map Landing Zones"]
+    SBX["fa:fa-flask Sandbox"]
+    DEC["fa:fa-box-archive Decommissioned"]
+
+    ID["fa:fa-id-card Identity"]
+    MGT["fa:fa-chart-line Management"]
+    CONN["fa:fa-network-wired Connectivity"]
+    SEC["fa:fa-shield-halved Security"]
+
+    CORP["fa:fa-building Corp<br/>(connected to hub network)"]
+    ONL["fa:fa-globe Online<br/>(internet-facing, no hub connectivity)"]
+
+    TRG --> PLAT
+    TRG --> LZ
+    TRG --> SBX
+    TRG --> DEC
+
+    PLAT --> ID
+    PLAT --> MGT
+    PLAT --> CONN
+    PLAT --> SEC
+
+    LZ --> CORP
+    LZ --> ONL
+
+    classDef root fill:#0078D4,color:#fff,stroke:#0078D4,stroke-width:2px;
+    classDef group fill:#005A9E,color:#fff,stroke:#005A9E;
+    classDef platform fill:#004578,color:#fff,stroke:#004578;
+    classDef leaf fill:#008575,color:#fff,stroke:#008575;
+
+    class TRG root;
+    class PLAT platform;
+    class LZ,SBX,DEC group;
+    class ID,MGT,CONN,SEC,CORP,ONL leaf;
 ```
 
 Each node in this hierarchy is a Management Group. Policies and role assignments applied at a Management Group scope are inherited by everything beneath it. This is how you enforce governance at scale without managing each subscription individually.
@@ -334,19 +361,49 @@ Your Landing Zone should be deployed and maintained through code, not portal cli
 
 The two most common choices are **GitHub Actions** and **Azure DevOps Pipelines**. Both can do the job. The more important question is how you structure your pipelines for safety.
 
-!!! tip "Canary Deployment Rings"
-    The pattern Microsoft recommends is **canary deployment rings**:
+The pattern Microsoft recommends is a **staged deployment approach**, where every platform change travels through a controlled sequence of environments before it reaches production. Here is how that works in practice:
 
-    | Ring | Scope | Purpose |
-    |------|-------|---------|
-    | **Ring 0** | Sandbox subscriptions | Changes land here first |
-    | **Ring 1** | Non-production corp subscriptions | Gate before production |
-    | **Ring 2** | Production | Only after Ring 1 passes |
+```mermaid
+flowchart LR
+    CHANGE["fa:fa-code-branch Platform Change\nPolicy / IaC / Network"]
 
-    A change to your Landing Zone platform propagates through the rings with gates between them. If something breaks in Ring 0, it never reaches production. This sounds obvious, but the majority of Landing Zone implementations have no deployment rings at all — platform changes go straight to production and hope for the best.
+    SANDBOX["fa:fa-flask Step 1\nValidate in Sandbox\nLow-risk · Isolated · Safe to break"]
+    NONPROD["fa:fa-vial Step 2\nNon-production Corp\nDev/Test · Limited blast radius"]
+    GATE["fa:fa-shield-halved Step 3\nApproval Gate\nManual sign-off or compliance check"]
+    PROD["fa:fa-circle-check Step 4\nProduction\nCorp & Online subscriptions"]
+
+    CHANGE --> SANDBOX
+    SANDBOX -->|"Validated ✓"| NONPROD
+    NONPROD -->|"Validated ✓"| GATE
+    GATE -->|"Approved ✓"| PROD
+
+    classDef start  fill:#0078D4,color:#fff,stroke:#0078D4,stroke-width:2px;
+    classDef safe   fill:#008575,color:#fff,stroke:#008575;
+    classDef gate   fill:#7719AA,color:#fff,stroke:#7719AA;
+    classDef prod   fill:#004578,color:#fff,stroke:#004578;
+
+    class CHANGE start;
+    class SANDBOX,NONPROD safe;
+    class GATE gate;
+    class PROD prod;
+```
+
+**Step 1 — Validate in Sandbox first.**
+Every change — whether it's a new Policy definition, a Terraform module update, or a change to your Hub VNet configuration — is deployed to the Sandbox Management Group first. Sandbox subscriptions are low-risk, isolated, and exist specifically to absorb the unexpected. If something breaks here, nothing outside the sandbox is affected and you fix it before it travels any further.
+
+**Step 2 — Promote to non-production Corp subscriptions.**
+Once the change has been validated in Sandbox, it moves to your non-production Landing Zone subscriptions — the environments where development and test workloads run. This is your second safety net. It's closer to production in configuration but still carries limited blast radius. Application teams may notice the change here, which is also useful — they can flag issues before production is touched.
+
+**Step 3 — Gate before production.**
+Before the change moves to production, introduce a deliberate approval gate. This can be a manual sign-off in your pipeline, an automated compliance check, or both. The gate exists to force a conscious decision: *has this change been sufficiently validated and are we confident it is safe to proceed?* Skipping the gate should require an explicit override, not be the default path.
+
+**Step 4 — Deploy to production Corp and Online subscriptions.**
+Only after passing the gate does the change reach your production workload subscriptions. At this point, the change has been through two environments, reviewed, and signed off. The risk of an unexpected impact is as low as it can reasonably be.
+
+This sounds methodical — because it is. The majority of Landing Zone implementations skip this entirely and deploy platform changes directly to production. That works fine until it doesn't, and when it doesn't, the impact is across every workload in the estate simultaneously.
 
 !!! warning "IaC Module Deprecation — Act Now :material-alert:"
-    The Terraform `terraform-azurerm-caf-enterprise-scale` module — the module most teams built their Landing Zones on — is now in extended support and will be archived on **1 August 2026**. If you're on it, your migration path is the **Azure Landing Zone (ALZ) IaC Accelerator** using Azure Verified Modules (AVM). This is not a future concern. Plan for it now.
+    This design area also covers the tooling decision for Infrastructure as Code. The Terraform `terraform-azurerm-caf-enterprise-scale` module — the module most teams built their Landing Zones on — is now in extended support and will be archived on **1 August 2026**. If you're on it, your migration path is the **Azure Landing Zone (ALZ) IaC Accelerator** using Azure Verified Modules (AVM). This is not a future concern. Plan for it now.
 
 ---
 
