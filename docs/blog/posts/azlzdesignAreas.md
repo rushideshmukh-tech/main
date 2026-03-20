@@ -17,7 +17,7 @@ authors:
     - rushikesh
 slug: azure-landing-zones-and-the-8-design-areas
 readtime: 10
-draft: true
+draft: false
 ---
 
 # The Foundation That Can't Afford to Crack
@@ -364,28 +364,22 @@ The two most common choices are **GitHub Actions** and **Azure DevOps Pipelines*
 The pattern Microsoft recommends is a **staged deployment approach**, where every platform change travels through a controlled sequence of environments before it reaches production. Here is how that works in practice:
 
 ```mermaid
-flowchart LR
-    CHANGE["fa:fa-code-branch Platform Change\nPolicy / IaC / Network"]
-
-    SANDBOX["fa:fa-flask Step 1\nValidate in Sandbox\nLow-risk · Isolated · Safe to break"]
-    NONPROD["fa:fa-vial Step 2\nNon-production Corp\nDev/Test · Limited blast radius"]
-    GATE["fa:fa-shield-halved Step 3\nApproval Gate\nManual sign-off or compliance check"]
-    PROD["fa:fa-circle-check Step 4\nProduction\nCorp & Online subscriptions"]
-
-    CHANGE --> SANDBOX
-    SANDBOX -->|"Validated ✓"| NONPROD
-    NONPROD -->|"Validated ✓"| GATE
-    GATE -->|"Approved ✓"| PROD
-
-    classDef start  fill:#0078D4,color:#fff,stroke:#0078D4,stroke-width:2px;
-    classDef safe   fill:#008575,color:#fff,stroke:#008575;
-    classDef gate   fill:#7719AA,color:#fff,stroke:#7719AA;
-    classDef prod   fill:#004578,color:#fff,stroke:#004578;
-
-    class CHANGE start;
-    class SANDBOX,NONPROD safe;
-    class GATE gate;
-    class PROD prod;
+kanban
+  column1[Step 1 · Sandbox]
+    task1[Deploy platform change]
+    task2[Validate in isolation]
+    task3[Fix any issues here]
+  column2[Step 2 · Non-production Corp]
+    task4[Promote validated change]
+    task5[Dev/Test workloads run here]
+    task6[App teams flag issues]
+  column3[Step 3 · Approval Gate]
+    task7[Manual sign-off or compliance check]
+    task8[Explicit override required to skip]
+  column4[Step 4 · Production]
+    task9[Deploy to Corp subscriptions]
+    task10[Deploy to Online subscriptions]
+    task11[Change live across estate]
 ```
 
 **Step 1 — Validate in Sandbox first.**
@@ -470,20 +464,20 @@ Before closing, there's a distinction that is simple to explain and consistently
 ## The 8 Design Areas: Architecture View
 
 ```mermaid
-flowchart TB
-    LZ([Azure Landing Zone])
-    LZ --> GRP1([Group 1: Environment Foundations])
-    LZ --> GRP2([Group 2: Compliance & Operations])
+flowchart LR
+    LZ([☁️ Azure Landing Zone])
+    LZ --> GRP1([🏗️ Group 1: Environment Foundations])
+    LZ --> GRP2([🛡️ Group 2: Compliance & Operations])
 
-    GRP1 --> ID([1. Identity & Tenant])
-    GRP1 --> RO([2. Resource Organisation])
-    GRP1 --> NT([3. Network Topology])
-    GRP1 --> GOV([4. Governance])
+    GRP1 --> ID([🪪 1. Identity & Tenant])
+    GRP1 --> RO([🗂️ 2. Resource Organisation])
+    GRP1 --> NT([🌐 3. Network Topology])
+    GRP1 --> GOV([⚖️ 4. Governance])
 
-    GRP2 --> SEC([5. Security])
-    GRP2 --> MGT([6. Management])
-    GRP2 --> PAD([7. Platform Automation])
-    GRP2 --> BCDR([8. BCDR])
+    GRP2 --> SEC([🔒 5. Security])
+    GRP2 --> MGT([📊 6. Management])
+    GRP2 --> PAD([⚙️ 7. Platform Automation])
+    GRP2 --> BCDR([🏥 8. BCDR])
 
     style LZ   fill:#0078D4,color:#fff,stroke:#0078D4
     style GRP1 fill:#005A9E,color:#fff,stroke:#005A9E
