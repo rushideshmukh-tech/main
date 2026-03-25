@@ -3,7 +3,7 @@ title: Subscription Vending and Landing Zone Drift
 description:  Subscription Vending and Landing Zone Drift
 date:
     created: 2026-03-23
-    updated: 2026-03-23
+    updated: 2026-03-25
 categories:
     - azure
     - framework
@@ -15,7 +15,7 @@ authors:
     - rushikesh
 slug: subscription-vending-and-landing-zone-drift
 readtime: 5
-draft: true
+draft: false
 ---
 
 # Beyond the Blueprint: How Landing Zones Decay (And How to Stop It)
